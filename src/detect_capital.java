@@ -21,3 +21,4 @@ public class detect_capital {
         }
     }
 }
+// hello i am swacha
