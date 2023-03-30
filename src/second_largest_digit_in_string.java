@@ -1,26 +1,22 @@
-import java.util.*;
+import java.util.HashMap;
 
 public class second_largest_digit_in_string {
     public static void main(String[] args) {
-        String s = "ck077";
+        String s = "abc1111";
         System.out.println(secondHighest(s));
     }
 
     public static int secondHighest(String s) {
-        Set<Character>set = new HashSet<>();
-        String res = s.replaceAll("([a-z])", "");
-        char[] ch = res.toCharArray();
-        for(char i : ch) set.add(i);
-        List<Character> list = new ArrayList<>(set);
-        list.sort(Collections.reverseOrder());
-        int currentIndex = 0;
-        int desiredIndex = 1;
-        for (Character element :list) {
-            if (currentIndex == desiredIndex)
-            {
-                return Integer.parseInt(String.valueOf(element));
-            }
-            currentIndex++;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int count = 0,index = 0;
+        for(char i : s.toCharArray()){
+            if(Character.isDigit(i)) map.putIfAbsent(Integer.parseInt(String.valueOf(i)),count++);
+        }
+
+        for(int i : map.keySet()){
+            if(index == 1) return i;
+            index++;
+
         }
         return -1;
     }
