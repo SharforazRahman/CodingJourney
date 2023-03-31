@@ -2,54 +2,31 @@ import java.util.*;
 
 public class two_out_of_three {
     public static void main(String[] args) {
-        int[] nums1 = {3,1};
-        int[] nums2 = {2,3};
-        int[] nums3 = {1,2};
+        int[] num1 = {1,1,3,2};
+        int[] num2 = {2, 3};
+        int[] num3 = {3};
+        System.out.println(twoOutOfThree(num1, num2, num3));
+    }
 
-        Set<Integer>set_one = new HashSet<>();
-        Set<Integer>set_two = new HashSet<>();
-        Set<Integer>set_three = new HashSet<>();
+    public static List<Integer> twoOutOfThree(int[] a, int[] b, int[] c) {
+        ArrayList<Integer> list = new ArrayList<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
+        Set<Integer> set = new HashSet<>();
 
-        for (int j : nums1) {
-            set_one.add(j);
+        for (int i : a) set.add(i);
+        for (int i : set) map.put(i, map.getOrDefault(i, 0) + 1);
+
+        set.clear();
+        for (int i : b) set.add(i);
+        for (int i : set) map.put(i, map.getOrDefault(i, 0) + 1);
+
+        set.clear();
+        for (int i : c) set.add(i);
+        for (int i : set) map.put(i, map.getOrDefault(i, 0) + 1);
+
+        for(int i : map.keySet()){
+            if(map.get(i) >= 2) list.add(i);
         }
-        for (int j : nums2) {
-            set_two.add(j);
-        }
-        for (int j : nums3) {
-            set_three.add(j);
-        }
-
-        ArrayList<Integer> list_one = new ArrayList<>(set_one);
-        ArrayList<Integer> list_two = new ArrayList<>(set_two);
-        ArrayList<Integer> list_three = new ArrayList<>(set_three);
-
-        list_one.addAll(list_two);
-        list_one.addAll(list_three);
-
-        int[] new_array = new int[list_one.size()];
-        HashMap<Integer,Integer> hm = new HashMap<>();
-        for(int i = 0; i < list_one.size(); i++){
-            new_array[i] = list_one.get(i);
-        }
-
-        for (int num : new_array) {
-            if (hm.containsKey(num)) {
-                int old_frequency = hm.get(num);
-                int new_frequency = old_frequency + 1;
-                hm.put(num, new_frequency);
-            } else {
-                hm.put(num, 1);
-            }
-        }
-
-        ArrayList<Integer> result = new ArrayList<>();
-        for(Map.Entry entry : hm.entrySet()){
-            int total = (int) entry.getValue();
-            if(total >= 2){
-                result.add((Integer) entry.getKey());
-            }
-        }
-        System.out.println(result);
+        return list;
     }
 }

@@ -1,38 +1,29 @@
-import java.util.*;
+import java.util.HashMap;
 
 public class most_frequent_even_element {
     public static void main(String[] args) {
-        int[] nums = {4,4,4,9,2,4};
-        int count_even = 0;
-        HashMap<Integer, Integer> hm = new HashMap<>();
-        for (int num : nums) {
-            if (num % 2 == 0) {
-                count_even++;
-                if (hm.containsKey(num)) {
-                    int old_frequency = hm.get(num);
-                    int new_frequency = old_frequency + 1;
-                    hm.put(num, new_frequency);
-                } else {
-                    hm.put(num, 1);
+        int[] num = {29,47,21,41,13,37,25,7};
+        System.out.println(mostFrequentEven(num));
+    }
+
+    public static int mostFrequentEven(int[] a) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i : a) map.put(i, map.getOrDefault(i, 0) + 1);
+
+        int max = -1, res = -1;
+        for (int i : map.keySet()) {
+            if (i % 2 == 0) {
+                if(map.get(i) > max) {
+                    max = map.get(i);
+                    res = i;
+                }else if(map.get(i) == max && res > i){
+                    res = i;
                 }
             }
         }
-        if(count_even > 0) {
-            int mx = -1;
-            int ans = -1;
-            for (Integer i : hm.keySet()) {
-                if (hm.get(i) > mx) {
-                    mx = hm.get(i);
-                    ans = i; // here i means keys;
-                }
-                else if (hm.get(i) == mx && ans > i) {
-                    ans = i;
-                }
-            }
-            System.out.println(ans);
-        }
-        else {
-            System.out.println(-1);
-        }
+        return res;
     }
 }
+
+
+

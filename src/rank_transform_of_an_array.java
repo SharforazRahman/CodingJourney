@@ -9,17 +9,14 @@ public class rank_transform_of_an_array {
 
     public static int[] arrayRankTransform(int[] arr) {
         HashMap<Integer, Integer> map = new HashMap<>();
+        int[] res = arr.clone();
         int rank = 1;
-        int[] a = Arrays.copyOf(arr, arr.length);
-        Arrays.sort(a);
+        Arrays.sort(res);
 
-        for (int j : a) {
-            if (!map.containsKey(j)) map.put(j, rank++);
+        for(int i : res) map.put(i, rank++);
+        for(int i = 0; i < arr.length; i++){
+            if(map.containsKey(arr[i])) res[i] = map.get(arr[i]);
         }
-
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = map.get(arr[i]);
-        }
-        return arr;
+        return res;
     }
 }
