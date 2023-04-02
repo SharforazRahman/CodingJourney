@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class word_pattern {
     public static void main(String[] args) {
@@ -16,22 +17,12 @@ public class word_pattern {
         Map<Character, String> charToWord = new HashMap<>();
         Map<String, Character> wordToChar = new HashMap<>();
 
-        for (int i = 0; i < pattern.length(); i++) {
-            char c = pattern.charAt(i);
-            String word = words[i];
+       for(int i = 0; i < pattern.length(); i++){
+           if(!charToWord.containsKey(pattern.charAt(i))) charToWord.put(pattern.charAt(i),words[i]);
+           if(!wordToChar.containsKey(words[i])) wordToChar.put(words[i],pattern.charAt(i));
 
-            if (!charToWord.containsKey(c)) {
-                charToWord.put(c, word);
-            }
-
-            if (!wordToChar.containsKey(word)) {
-                wordToChar.put(word, c);
-            }
-
-            if (!charToWord.get(c).equals(word) || !wordToChar.get(word).equals(c)) {
-                return false;
-            }
-        }
+           if(!charToWord.get(pattern.charAt(i)).equals(words[i]) || !wordToChar.get(words[i]).equals(pattern.charAt(i))) return false;
+       }
 
         return true;
     }

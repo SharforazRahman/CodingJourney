@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class isomorphic_strings {
     public static void main(String[] args) {
-        String s = "bbbaaaba", t = "aaabbbba";
+        String s = "foo", t = "bar";
         System.out.println(isIsomorphic(s, t));
     }
     public static boolean isIsomorphic(String s, String t) {
@@ -13,18 +13,10 @@ public class isomorphic_strings {
         if(s.length() != t.length()) return false;
 
         for(int i = 0; i < s.length(); i++){
-            char c = s.charAt(i);
-            char ch = t.charAt(i);
+            if(!map1.containsKey(s.charAt(i))) map1.put(s.charAt(i),t.charAt(i));
+            if(!map1.containsKey(t.charAt(i))) map2.put(t.charAt(i),s.charAt(i));
 
-            if(!map1.containsKey(c)){
-                map1.put(c,ch);
-            }
-            if(!map2.containsKey(ch)){
-                map2.put(ch,c);
-            }
-            if(!(map1.get(c) == ch) || !(map2.get(ch) == c)){
-                return false;
-            }
+            if(!(map1.get(s.charAt(i)) == t.charAt(i)) || !(map2.get(t.charAt(i)) == s.charAt(i))) return false;
         }
         return true;
     }

@@ -1,27 +1,21 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class majority_element_two {
     public static void main(String[] args) {
-        int[] nums = {3,2,3};
-        HashMap <Integer,Integer> hm = new HashMap<>();
-        ArrayList <Integer> list = new ArrayList<>();
-        Set<Integer> set = new HashSet<>();
-        for (int num : nums) {
-            if (hm.containsKey(num)) {
-                int old_frequency = hm.get(num);
-                int new_frequency = old_frequency + 1;
-                hm.put(num, new_frequency);
-            } else {
-                hm.put(num, 1);
-            }
+        int[] num = {1, 2};
+        System.out.println(majorityElement(num));
+    }
+
+    public static List<Integer> majorityElement(int[] a) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        ArrayList<Integer> list = new ArrayList<>();
+
+        for (int i : a) map.put(i, map.getOrDefault(i, 0) + 1);
+        for (int i : map.keySet()) {
+            if (map.get(i) > a.length / 3) list.add(i);
         }
-        for (int num : nums) {
-            if (hm.get(num) > nums.length / 3) {
-                list.add(num);
-            }
-        }
-        set.addAll(list);
-        List <Integer> result = new ArrayList<>(set);
-        System.out.println(result);
+        return list;
     }
 }

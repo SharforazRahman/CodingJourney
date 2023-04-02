@@ -1,30 +1,17 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class unique_number_of_occurrences {
     public static void main(String[] args) {
-        int[] arr = {-3,0,1,-3,1,1,1,-3,10,0};
-        HashMap<Integer, Integer> hm = new HashMap<>();
-        ArrayList<Integer> list = new ArrayList<>();
-        for (Integer i : arr) {
-            if (hm.containsKey(i)) {
-                int old_value = hm.get(i);
-                int new_value = old_value + 1;
-                hm.put(i, new_value);
-            } else {
-                hm.put(i, 1);
-            }
-        }
-        for(Map.Entry entry : hm.entrySet()){
-            list.add((Integer) entry.getValue());
-        }
-        Collections.sort(list);
-        boolean b = true;
-        for(int i = 0; i < list.size()-1; i++){
-            if(Objects.equals(list.get(i), list.get(i + 1))){
-                b = false;
-                break;
-            }
-        }
-        System.out.println(b);
+        int[] arr = {-3, 0, 1, -3, 1, 1, 1, -3, 10, 0};
+        System.out.println(uniqueOccurrences(arr));
+    }
+
+    public static boolean uniqueOccurrences(int[] arr) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i : arr) map.put(i, map.getOrDefault(i, 0) + 1);
+        Set<Integer> set = new HashSet<>(map.values());
+        return set.size() == map.values().size();
     }
 }

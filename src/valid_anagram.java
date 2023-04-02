@@ -1,27 +1,19 @@
-import java.util.Arrays;
+import java.util.HashMap;
 
 public class valid_anagram {
     public static void main(String[] args) {
-        String s = "rat";
-        String t = "car";
+        String s = "anagram";
+        String t = "nagaram";
+        System.out.println(isAnagram(s,t));
+    }
+    public static boolean isAnagram(String s, String t) {
+        HashMap<Character,Integer> map = new HashMap<>();
+        for(char c : s.toCharArray()) map.put(c, map.getOrDefault(c, 0) + 1);
+        for(char c : t.toCharArray()) map.put(c, map.getOrDefault(c, 0) - 1);
 
-        char[] ch_t = t.toCharArray();
-        StringBuilder sb_t = new StringBuilder();
-        Arrays.sort(ch_t);
-
-        char[] ch_s = s.toCharArray();
-        StringBuilder sb_s = new StringBuilder();
-        Arrays.sort(ch_s);
-
-
-        for (char c : ch_t) {
-            sb_t.append(c);
+        for(int i : map.values()){
+            if(i != 0) return false;
         }
-        for (char c : ch_s) {
-            sb_s.append(c);
-        }
-
-        boolean b = sb_s.toString().equals(sb_t.toString());
-        System.out.println(b);
+        return true;
     }
 }
