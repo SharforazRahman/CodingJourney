@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class find_words_that_can_be_formed_bt_characters {
     public static void main(String[] args) {
@@ -12,26 +9,16 @@ public class find_words_that_can_be_formed_bt_characters {
 
     public static int countCharacters(String[] words, String chars) {
         ArrayList<String> list = new ArrayList<>();
-        Set<Character> set = new HashSet<>();
-        char[] a = chars.toCharArray();
-        for (char c : a) set.add(c);
-        ArrayList<Character> check = new ArrayList<>(set);
-        boolean b = false;
-        for (String word : words) {
-            char[] w = word.toCharArray();
-            for (char c : w) {
-                if (check.contains(c)) {
-                    b = true;
-                }
-            }
-            if (b) list.add(word);
+        HashMap<Character,Integer> map = new HashMap<>();
+        HashMap<Character,Integer> map2 = new HashMap<>();
+
+        for(char c: chars.toCharArray()) map.put(c, map.getOrDefault(c,0)+1);
+        for(int i = 0; i < words.length; i++){
+            for(char c: words[i].toCharArray()) map2.put(c, map2.getOrDefault(c,0)+1);
         }
-        System.out.println(set);
+        System.out.println(map);
+        System.out.println(map2);
         System.out.println(list);
-        int result = 0;
-        for (String s : list) {
-            result = s.length() + result;
-        }
-        return result;
+        return 0;
     }
 }
