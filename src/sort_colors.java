@@ -3,34 +3,18 @@ import java.util.Arrays;
 
 public class sort_colors {
     public static void main(String[] args) {
-        int[] nums = {2,0,1};
-        ArrayList<Integer>list = new ArrayList<>();
-        int count_0 = 0;
-        int count_1 = 0;
-        int count_2 = 0;
+        int[] arr = {2,0,1};
+        int zero = 0, one = 0, two = 0;
 
-        for (int num : nums) {
-            if (num == 0) {
-                count_0++;
-            } else if (num == 1) {
-                count_1++;
-            } else {
-                count_2++;
-            }
+        for (int i : arr) {
+            if (i == 0) zero++;
+            else if (i == 1) one++;
+            else two++;
         }
-        for (int i  = 0; i < count_0; i++){
-            list.add(0);
-        }
-        for (int i  = 0; i < count_1; i++){
-            list.add(1);
-        }
-        for (int i  = 0; i < count_2; i++){
-            list.add(2);
-        }
-        Arrays.fill(nums,0);
-        for(int i = 0; i < list.size(); i++){
-            nums[i] = list.get(i);
-        }
-        System.out.println(Arrays.toString(nums));
+        for (int i = 0; i < zero; i++) arr[i] = 0;
+        for (int i = zero; i < zero + one; i++) arr[i] = 1;
+        for (int i = zero + one; i < arr.length; i++) arr[i] = 2;
+
+        System.out.println(Arrays.toString(arr));
     }
 }
