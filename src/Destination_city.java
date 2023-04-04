@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class Destination_city {
     public static void main(String[] args) {
-        List<List<String>> paths = {{"London","New York"},{"New York","Lima"},{"Lima","Sao Paulo"}};
+        List<List<String>> paths = new ArrayList<>();
         System.out.println(destCity(paths));
     }
     public static String destCity(List<List<String>> paths) {
